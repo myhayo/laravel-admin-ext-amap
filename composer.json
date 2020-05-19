@@ -1,5 +1,5 @@
 {
-    "name": "laravel-admin-ext/amap",
+    "name": "myhayo/laravel-admin-ext-amap",
     "description": "amap for laravel admin",
     "type": "library",
     "keywords": ["laravel-admin", "extension", "amap"],
