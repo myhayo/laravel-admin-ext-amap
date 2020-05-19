@@ -2,19 +2,8 @@ laravel-admin extension amap
 ======
 
 # 安装
-## step 1
-打开composer.json文件, 加入下面的配置:
 
-    "repositories": [
-        {
-            "type": "path",
-            "url": "app/Admin/extensions/laravel-admin-ext/amap"
-        }
-    ]
-## step 2
-引用插件
-
-    composer require laravel-admin-ext/amap
+    composer require myhayo/laravel-admin-ext-amap
 
 # 使用
 ## 配置
