@@ -127,8 +127,6 @@ class AMap extends Field
             position: [lng.val() || 0, lat.val() || 0],
         })
 
-        resetAddressInput(selectInputName, [lng.val() || 0, lat.val() || 0]);
-        
         map.on('click', function(e) {
             marker.setPosition(e.lnglat);
             
