@@ -18,7 +18,7 @@
 
             <div class="{{$hidden_lng_lat_input ? 'col-sm-12' : 'col-sm-6'}}">
                 <div class="input-group">
-                    <input type="text" class="form-control" id="{{$column['address']}}" name="{{$column['address']}}" value="{{$value['lat']}}">
+                    <input type="text" class="form-control" id="{{$column['address']}}" name="{{$column['address']}}" value="{{$value['address']}}">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-info btn-flat"><i class="fa fa-search"></i></button>
                     </span>
