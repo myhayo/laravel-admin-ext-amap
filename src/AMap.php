@@ -31,6 +31,7 @@ class AMap extends Field
     protected $hidden_lng_lat_input = false;
 
     const AMAP_JS_API = '//webapi.amap.com/maps?v=1.4.12&plugin=AMap.Geocoder&key=%s';
+    const AMAP_UI_JS_API = '//webapi.amap.com/ui/1.1/main.js?v=1.1.1';
 
     public function __construct(string $column = '', array $arguments = [])
     {
@@ -78,7 +79,7 @@ class AMap extends Field
      */
     public static function getAssets()
     {
-        return ['js' => sprintf(self::AMAP_JS_API, Extension::config('config.api_key'))];
+        return ['js' => [sprintf(self::AMAP_JS_API, Extension::config('config.api_key')), self::AMAP_UI_JS_API]];
     }
 
     /**
@@ -159,19 +160,18 @@ class AMap extends Field
             });
         }
 
-        AMap.plugin('AMap.Autocomplete',function(){
-            var autoOptions = {
-                input:"{$this->column['address']}"
-            };
-            var autocomplete = new AMap.Autocomplete(autoOptions);
-
-            AMap.event.addListener(autocomplete, "select", function(data){
-                map.setZoomAndCenter(18, data.poi.location);
-                marker.setPosition(data.poi.location);
-                lat.val(data.poi.location.lat);
-                lng.val(data.poi.location.lng);
+        AMapUI.loadUI(['misc/PoiPicker'], function(PoiPicker) {
+            var poiPicker = new PoiPicker({
+                input: "{$this->column['address']}"
+            });
+            
+            poiPicker.on('poiPicked', function(poiResult) {
+                map.setZoomAndCenter(18, poiResult.item.location);
+                marker.setPosition(poiResult.item.location);
+                lat.val(poiResult.item.location.lat);
+                lng.val(poiResult.item.location.lng);
                 
-                resetAddressInput(selectInputName, [data.poi.location.lng, data.poi.location.lat]);
+                resetAddressInput(selectInputName, [poiResult.item.location.lng, poiResult.item.location.lat]);
             });
         });
     }
